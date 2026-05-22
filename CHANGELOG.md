@@ -61,7 +61,7 @@
 ## v4.0.0 — Meme Coin Security Module (Apr 2026)
 
 ### Added — New Skill Domain
-- `skills/meme-coin-audit/SKILL.md`: **Meme coin rug pull detection + 8 token bug classes**
+- `.opencode/skills/meme-coin-audit/SKILL.md`: **Meme coin rug pull detection + 8 token bug classes**
   - Mint authority / freeze authority checks
   - Bonding curve exploit patterns
   - LP lock verification
@@ -108,7 +108,7 @@
 ## v3.1.0 — Hunting Methodology Skill (Mar 2026)
 
 ### Added — New Skill Domain
-- `skills/bb-methodology/SKILL.md`: **Hunting mindset + 5-phase non-linear workflow** — the "HOW to think" layer that was missing from the toolkit
+- `.opencode/skills/bb-methodology/SKILL.md`: **Hunting mindset + 5-phase non-linear workflow** — the "HOW to think" layer that was missing from the toolkit
   - **Part 1: Mindset** — Define/Select/Execute discipline, 4 thinking domains (critical, multi-perspective, tactical, strategic), developer psychology reverse-engineering, Amateur vs Pro 7-phase comparison, Feature-based vs Vuln-based route selection, anti-patterns
   - **Part 2: Workflow** — 5-phase non-linear flow (Recon → Map → Find → Prove → Report) with decision trees per phase, input-type → vuln-class routing, Error vs Blind detection cascade, escalation decision trees per vuln class
   - **Part 3: Navigation & Timing** — "I'm stuck because..." quick reference table, 20-minute rotation clock, tool routing by phase with rationale, session start/end checklists
@@ -122,10 +122,10 @@
 
 ### Changed — CVSS 3.1 → 4.0
 - `tools/validate.py`: Full CVSS 4.0 interactive scorer. Replaces 8-metric CVSS 3.1 with 11-metric CVSS 4.0. New metrics: AT (Attack Requirements), VC/VI/VA (Vulnerable System), SC/SI/SA (Subsequent System, incl. Safety). Scope metric removed. UI now has three values (None / Passive / Active). Score verified via FIRST.org calculator link in output.
-- `agents/report-writer.md`: Updated CVSS section to 4.0. New metric descriptions, updated common-pattern examples, verification link.
+- `.opencode/agents/report-writer.md`: Updated CVSS section to 4.0. New metric descriptions, updated common-pattern examples, verification link.
 
 ### Fixed — TODOs resolved
-- `agents/autopilot.md` already implemented TODO-2 (safe HTTP methods) and TODO-3 (circuit breaker) — marked resolved in TODOS.md
+- `.opencode/agents/autopilot.md` already implemented TODO-2 (safe HTTP methods) and TODO-3 (circuit breaker) — marked resolved in TODOS.md
 - `tools/hunt.py` BASE_DIR path resolution was already correct (TODO-4 was based on wrong assumption about file location) — marked resolved
 - `tools/recon_adapter.py` created (TODO-5): auto-detects nested vs flat recon format, returns unified `ReconData`. `normalize_to_nested()` migrates legacy flat output. CLI: `python3 tools/recon_adapter.py example.com --migrate`
 
@@ -160,7 +160,7 @@
 - **Intigriti template**: Full format with platform-specific notes (video PoC preference, safe harbor stance)
 - **CVSS 4.0 quick reference**: Key differences from CVSS 3.1, score examples for common findings, calculator link
 
-### Added — rules/hunting.md
+### Added — .opencode/rules/hunting.md
 - **Rule 18**: Mobile = different attack surface (APK decompile workflow, key targets)
 - **Rule 19**: CI/CD is attack surface (GitHub Actions expression injection, dangerous workflow patterns)
 - **Rule 20**: SAML/SSO = highest auth bug density (test checklist)
@@ -177,15 +177,15 @@
 Major restructure into a full bug bounty plugin with multi-component architecture.
 
 ### Added
-- `skills/` directory with 7 focused skill domains (split from monolithic SKILL.md)
-  - `skills/bug-bounty/` — master workflow (unchanged from v1)
-  - `skills/web2-recon/` — recon pipeline, subdomain enum, 5-minute rule
-  - `skills/web2-vuln-classes/` — 18 bug classes with bypass tables
-  - `skills/security-arsenal/` — payloads, bypass tables, never-submit list
-  - `skills/web3-audit/` — 10 smart contract bug classes, Foundry template
-  - `skills/report-writing/` — H1/Bugcrowd/Intigriti/Immunefi templates
-  - `skills/triage-validation/` — 7-Question Gate, 4 gates, always-rejected list
-- `commands/` directory with 8 slash commands
+- `.opencode/skills/` directory with 7 focused skill domains (split from monolithic SKILL.md)
+  - `.opencode/skills/bug-bounty/` — master workflow (unchanged from v1)
+  - `.opencode/skills/web2-recon/` — recon pipeline, subdomain enum, 5-minute rule
+  - `.opencode/skills/web2-vuln-classes/` — 18 bug classes with bypass tables
+  - `.opencode/skills/security-arsenal/` — payloads, bypass tables, never-submit list
+  - `.opencode/skills/web3-audit/` — 10 smart contract bug classes, Foundry template
+  - `.opencode/skills/report-writing/` — H1/Bugcrowd/Intigriti/Immunefi templates
+  - `.opencode/skills/triage-validation/` — 7-Question Gate, 4 gates, always-rejected list
+- `.opencode/commands/` directory with 8 slash commands
   - `/recon` — full recon pipeline
   - `/hunt` — start hunting a target
   - `/validate` — 4-gate finding validation
@@ -194,15 +194,15 @@ Major restructure into a full bug bounty plugin with multi-component architectur
   - `/scope` — asset scope verification
   - `/triage` — quick 7-Question Gate
   - `/web3-audit` — smart contract audit
-- `agents/` directory with 5 specialized agents
+- `.opencode/agents/` directory with 5 specialized agents
   - `recon-agent` — runs recon pipeline
   - `report-writer` — generates reports
   - `validator` — validates findings
   - `web3-auditor` — audits contracts
   - `chain-builder` — builds exploit chains
 - `hooks/hooks.json` — session start/stop hooks with hunt reminders
-- `rules/hunting.md` — 17 critical hunting rules (always active)
-- `rules/reporting.md` — 12 report quality rules (always active)
+- `.opencode/rules/hunting.md` — 17 critical hunting rules (always active)
+- `.opencode/rules/reporting.md` — 12 report quality rules (always active)
 - `AGENTS.md` — plugin overview and quick-start guide
 - `install.sh` — one-command skill installation
 

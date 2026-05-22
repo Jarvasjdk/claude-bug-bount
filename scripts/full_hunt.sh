@@ -204,7 +204,7 @@ sep
 # ── Crawl with katana ──────────────────────────────────────────────────────────
 # 5 min cap: depth-5 katana runs can hang indefinitely on content-heavy
 # targets (news, video, infinite calendars). Depth reduced to 3 to match
-# agents/recon-agent.md and commands/recon.md.
+# .opencode/agents/recon-agent.md and .opencode/commands/recon.md.
 if [ "$(check_tool katana)" = true ]; then
     log "Crawling with katana (5 min cap, depth 3)..."
     timeout 300 katana -u "$TARGETURL" -d 3 -jc -kf all "${BB_AUTH_ARGS[@]}" -o "$OUT/urls/katana.txt" -silent 2>/dev/null || true

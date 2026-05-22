@@ -21,7 +21,7 @@ Items deferred from the MCP-First Bionic Hunter design review (2026-03-24).
 **Resolution:** Implemented `SafeMethodPolicy` class in `memory/audit_log.py`. Default safe methods: GET/HEAD/OPTIONS. PUT/DELETE/PATCH/POST return `require_approval`. Configurable via `safe_methods` set, disableable via `enabled=False`. 12 tests in `tests/test_safe_method_policy.py`. Integrated into `AutopilotGuard`.
 ## ~~TODO-2: Safe HTTP method policy for autopilot --yolo mode~~ ✅ RESOLVED
 
-**Resolved in:** `agents/autopilot.md` Safety Rails section
+**Resolved in:** `.opencode/agents/autopilot.md` Safety Rails section
 > PUT/DELETE/PATCH require human approval in --yolo mode (safe_methods_only enforced).
 
 ---
@@ -39,7 +39,7 @@ Items deferred from the MCP-First Bionic Hunter design review (2026-03-24).
 **Resolution:** Implemented `AutopilotGuard` class in `memory/audit_log.py` — integrates existing `CircuitBreaker` + `RateLimiter` + new `SafeMethodPolicy` into a single `check_request()` call. Returns structured decisions: `allow`, `block` (circuit tripped), or `require_approval` (unsafe method). Extracts host from URL automatically. 24 tests in `tests/test_autopilot_guard.py`.
 ## ~~TODO-3: Circuit breaker for autopilot loop~~ ✅ RESOLVED
 
-**Resolved in:** `agents/autopilot.md` Circuit Breaker section
+**Resolved in:** `.opencode/agents/autopilot.md` Circuit Breaker section
 > 5 consecutive 403/429/timeout → paranoid/normal modes ask human; yolo auto-backs off 60s then skips host.
 
 ---
@@ -74,13 +74,13 @@ Items deferred from the MCP-First Bionic Hunter design review (2026-03-24).
 
 ## ~~TODO-6: Auto-memory at hunt session end~~ ✅ RESOLVED (2026-04-16)
 
-**Resolution:** Added `make_session_summary_entry()` to `memory/schemas.py` and `log_session_summary()` to `memory/hunt_journal.py`. Both `agents/autopilot.md` and `commands/hunt.md` now instruct the agent to call `log_session_summary()` at session end. Entries are tagged `auto_logged` + `session_summary` and are non-fatal on failure. 11 new tests in `tests/test_hunt_journal.py`.
+**Resolution:** Added `make_session_summary_entry()` to `memory/schemas.py` and `log_session_summary()` to `memory/hunt_journal.py`. Both `.opencode/agents/autopilot.md` and `.opencode/commands/hunt.md` now instruct the agent to call `log_session_summary()` at session end. Entries are tagged `auto_logged` + `session_summary` and are non-fatal on failure. 11 new tests in `tests/test_hunt_journal.py`.
 
 **What:** `/remember` is currently the only write path into hunt memory. Hunters forget to run it. The memory → hunt feedback loop never spins up in practice. At the end of every `/hunt` and `/autopilot` session, automatically write a journal entry with target, endpoints tested, vuln classes tried, and results. Hunter can still run `/remember` for rich notes (payout, technique, tags).
 
 **Why:** The "memory-informed hunt" promise only works if memory gets populated. Manual `/remember` has ~10% usage rate in practice. Auto-logging makes the flywheel start on day 1.
 
-**Implementation:** Add session summary auto-log to the end of `agents/autopilot.md` and `commands/hunt.md`. Write a minimal journal entry via `HuntJournal.append()`. Fields: target, action=hunt, endpoints_tested list, vuln_classes_tried list, result=session_summary.
+**Implementation:** Add session summary auto-log to the end of `.opencode/agents/autopilot.md` and `.opencode/commands/hunt.md`. Write a minimal journal entry via `HuntJournal.append()`. Fields: target, action=hunt, endpoints_tested list, vuln_classes_tried list, result=session_summary.
 
 **Source:** /autoplan review (2026-04-16)
 
@@ -88,7 +88,7 @@ Items deferred from the MCP-First Bionic Hunter design review (2026-03-24).
 
 ## ~~TODO-7: Memory GC / rotation policy~~ ✅ RESOLVED (2026-04-30)
 
-**Resolution:** Added `memory/rotation.py` — size-based JSONL rotator (10 MB cap, 3 backups) under `fcntl.LOCK_EX`. Wired into `AuditLog.log()` and `PatternDB.save()` so writes auto-rotate transparently. Added `tools/memory_gc.py` + `commands/memory-gc.md` for manual reporting / rotation / backup purge. 22 tests in `tests/test_rotation.py`.
+**Resolution:** Added `memory/rotation.py` — size-based JSONL rotator (10 MB cap, 3 backups) under `fcntl.LOCK_EX`. Wired into `AuditLog.log()` and `PatternDB.save()` so writes auto-rotate transparently. Added `tools/memory_gc.py` + `.opencode/commands/memory-gc.md` for manual reporting / rotation / backup purge. 22 tests in `tests/test_rotation.py`.
 
 **What:** `journal.jsonl`, `patterns.jsonl`, and `audit.jsonl` grow indefinitely with no rotation or size limit. A `/memory gc` command or automatic rotation at 10MB should be added.
 

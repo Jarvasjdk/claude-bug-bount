@@ -90,7 +90,7 @@ opencode .
 # /hunt target.com
 ```
 
-OpenCode auto-discovers `commands/`, `skills/`, and `rules/` from the project root. All 21 slash commands and 9 skill domains are available immediately.
+OpenCode auto-discovers `.opencode/commands/`, `.opencode/skills/`, and `.opencode/rules/` from the project root. All 21 slash commands and 9 skill domains are available immediately.
 
 ### Way 2 — Manual install
 
@@ -98,7 +98,7 @@ OpenCode auto-discovers `commands/`, `skills/`, and `rules/` from the project ro
 git clone https://github.com/shuvonsec/claude-bug-bounty.git
 cd claude-bug-bounty
 chmod +x install_tools.sh && ./install_tools.sh   # installs scanning tools (subfinder, httpx, nuclei...)
-chmod +x install.sh && ./install.sh               # installs AI skills + commands into ~/.opencode/
+chmod +x install.sh && ./install.sh               # installs AI skills + commands into ~/.config/opencode/
 ```
 
 <br>
@@ -129,7 +129,7 @@ Pause before any active POST/PUT/DELETE so I can approve.
 
 ```text
 I think I found a [VULN_CLASS] on [ENDPOINT/PARAM]. Walk it through the
-7-Question Gate and the 4 validation gates from skills/triage-validation/.
+7-Question Gate and the 4 validation gates from .opencode/skills/triage-validation/.
 If it can't clearly pass all 7, kill it — I'd rather drop a maybe than
 tank my N/A ratio on the platform.
 ```
@@ -165,7 +165,7 @@ ones I haven't touched. Don't re-run recon unless it's older than 7 days.
 
 ```text
 Audit the Solidity contract at [path/to/Contract.sol]. Walk all 10 DeFi
-bug classes from skills/web3-audit: reentrancy, oracle manipulation,
+bug classes from .opencode/skills/web3-audit: reentrancy, oracle manipulation,
 access control, accounting desync, flash loan, signature replay, ERC4626
 share inflation, off-by-one, incomplete code paths, proxy/upgrade.
 For any finding, drop a Foundry PoC using the template in that skill.
@@ -302,7 +302,7 @@ Thin wrappers over external tools. Each one is gated on tool presence — missin
 - **8 new commands.** `/scope-aggregate`, `/secrets-hunt`, `/takeover`, `/cloud-recon`, `/param-discover`, `/bypass-403`, `/scan-cves`, `/arsenal` — all under the **Recon Toolkit** table below.
 - **External tool registry.** `tools/external_arsenal.sh` is the single source of truth for ~50 external tools (install hints, upstream URLs, `_have <tool>` helper). Replaces scattered `command -v` checks across the shell scripts.
 - **Recon pipeline.** Optional nuclei phase in `recon_engine.sh` (off by default; gated on tool presence).
-- **Methodology cheatsheet.** `skills/security-arsenal/METHODOLOGY_CHEATSHEET.md` distills per-vuln quick-check tables from HowToHunt + HolyTips + AllAboutBugBounty + KingOfBugBountyTips into one reference.
+- **Methodology cheatsheet.** `.opencode/skills/security-arsenal/METHODOLOGY_CHEATSHEET.md` distills per-vuln quick-check tables from HowToHunt + HolyTips + AllAboutBugBounty + KingOfBugBountyTips into one reference.
 
 ### v4.2.0 — Memory Rotation (Apr 2026)
 
@@ -319,7 +319,7 @@ Thin wrappers over external tools. Each one is gated on tool presence — missin
 ### v4.0.0 — Meme Coin Security Module (Apr 2026)
 
 - **`/token-scan <contract>`** — automated rug pull scanner for EVM and Solana tokens
-- **`skills/meme-coin-audit/`** — 8 token bug classes: mint authority, freeze authority, LP locks, honeypot detection, bonding curve exploits, Solana SPL checks
+- **`.opencode/skills/meme-coin-audit/`** — 8 token bug classes: mint authority, freeze authority, LP locks, honeypot detection, bonding curve exploits, Solana SPL checks
 - **New agent:** `token-auditor`
 
 ### v3.1.1 — CI/CD Scanner (Mar 2026)
@@ -333,7 +333,7 @@ Thin wrappers over external tools. Each one is gated on tool presence — missin
 <br>
 
 **v3.1.0 — Hunting Methodology Skill**
-- `skills/bb-methodology/` — mindset + 5-phase non-linear workflow, decision trees per vuln class, 20-min rotation clock
+- `.opencode/skills/bb-methodology/` — mindset + 5-phase non-linear workflow, decision trees per vuln class, 20-min rotation clock
 
 **v3.0.0 — The Bionic Hunter**
 - `/autopilot` — full autonomous hunt loop with `--paranoid`, `--normal`, `--yolo` modes
@@ -438,7 +438,7 @@ OpenCode auto-discovers all commands, skills, and rules from the project root.
 git clone https://github.com/shuvonsec/claude-bug-bounty.git
 cd claude-bug-bounty
 chmod +x install_tools.sh && ./install_tools.sh   # scanning tools (subfinder, httpx, nuclei, etc.)
-chmod +x install.sh && ./install.sh               # AI skills + commands into ~/.opencode/
+chmod +x install.sh && ./install.sh               # AI skills + commands into ~/.config/opencode/
 ```
 
 ### API Keys
@@ -501,7 +501,7 @@ These apply every session, no exceptions:
 
 PRs welcome. Best contributions:
 - New vulnerability scanners or detection modules
-- Payload additions to `skills/security-arsenal/SKILL.md`
+- Payload additions to `.opencode/skills/security-arsenal/SKILL.md`
 - Real-world methodology improvements (with evidence from paid reports)
 - Support for more platforms (YesWeHack, Synack, HackenProof)
 

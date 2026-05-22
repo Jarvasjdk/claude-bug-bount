@@ -12,21 +12,21 @@ This repo is an OpenCode plugin for professional bug bounty hunting across Hacke
 
 | Skill | Domain |
 |---|---|
-| `skills/bug-bounty/` | Master workflow — recon to report, all vuln classes, LLM testing, chains |
-| `skills/bb-methodology/` | **Hunting mindset + 5-phase non-linear workflow + tool routing + session discipline** |
-| `skills/web2-recon/` | Subdomain enum, live host discovery, URL crawling, nuclei |
-| `skills/web2-vuln-classes/` | 18 bug classes with bypass tables (SSRF, open redirect, file upload, Agentic AI) |
-| `skills/security-arsenal/` | Payloads, bypass tables, gf patterns, always-rejected list |
-| `skills/web3-audit/` | 10 smart contract bug classes, Foundry PoC template, pre-dive kill signals |
-| `skills/meme-coin-audit/` | Meme coin rug pull detection, token authority checks, bonding curve exploits, LP attacks |
-| `skills/report-writing/` | H1/Bugcrowd/Intigriti/Immunefi report templates, CVSS 3.1, human tone |
-| `skills/triage-validation/` | 7-Question Gate, 4 gates, never-submit list, conditionally valid table |
+| `.opencode/skills/bug-bounty/` | Master workflow — recon to report, all vuln classes, LLM testing, chains |
+| `.opencode/skills/bb-methodology/` | **Hunting mindset + 5-phase non-linear workflow + tool routing + session discipline** |
+| `.opencode/skills/web2-recon/` | Subdomain enum, live host discovery, URL crawling, nuclei |
+| `.opencode/skills/web2-vuln-classes/` | 18 bug classes with bypass tables (SSRF, open redirect, file upload, Agentic AI) |
+| `.opencode/skills/security-arsenal/` | Payloads, bypass tables, gf patterns, always-rejected list |
+| `.opencode/skills/web3-audit/` | 10 smart contract bug classes, Foundry PoC template, pre-dive kill signals |
+| `.opencode/skills/meme-coin-audit/` | Meme coin rug pull detection, token authority checks, bonding curve exploits, LP attacks |
+| `.opencode/skills/report-writing/` | H1/Bugcrowd/Intigriti/Immunefi report templates, CVSS 3.1, human tone |
+| `.opencode/skills/triage-validation/` | 7-Question Gate, 4 gates, never-submit list, conditionally valid table |
 
 ### Commands (21 slash commands)
 
 > **Note:** All commands are prefixed to avoid conflicts with OpenCode's built-in commands.
 > `/resume` is a reserved OpenCode command — use `/pickup` to continue a previous hunt.
-> OpenCode reads `commands/` at project root — all commands load automatically via Ctrl+P.
+> OpenCode reads `.opencode/commands/` at project root — all commands load automatically via Ctrl+P.
 
 | Command | Usage |
 |---|---|
@@ -67,8 +67,8 @@ This repo is an OpenCode plugin for professional bug bounty hunting across Hacke
 
 ### Rules (always active)
 
-- `rules/hunting.md` — 17 critical hunting rules
-- `rules/reporting.md` — report quality rules
+- `.opencode/rules/hunting.md` — 17 critical hunting rules
+- `.opencode/rules/reporting.md` — report quality rules
 
 ### Tools (Python/shell — in `tools/`)
 
@@ -93,8 +93,8 @@ This repo is an OpenCode plugin for professional bug bounty hunting across Hacke
 ### External tool references
 
 - `wordlists/REFERENCES.md` — pointers to SecLists / OneListForAll / fuzz4bounty / PayloadsAllTheThings
-- `skills/security-arsenal/REFERENCES.md` — methodology, writeup archives, dorks, key-verification, AI-security skill repos
-- `skills/security-arsenal/METHODOLOGY_CHEATSHEET.md` — per-vuln quick-check tables distilled from HowToHunt + HolyTips + AllAboutBugBounty + KingOfBugBountyTips
+- `.opencode/skills/security-arsenal/REFERENCES.md` — methodology, writeup archives, dorks, key-verification, AI-security skill repos
+- `.opencode/skills/security-arsenal/METHODOLOGY_CHEATSHEET.md` — per-vuln quick-check tables distilled from HowToHunt + HolyTips + AllAboutBugBounty + KingOfBugBountyTips
 
 ### MCP Integrations (in `mcp/`)
 
@@ -111,7 +111,7 @@ This repo is an OpenCode plugin for professional bug bounty hunting across Hacke
 
 ## Start Here
 
-OpenCode auto-discovers `commands/`, `skills/`, and `rules/` from the project root. Simply open the project:
+OpenCode auto-discovers `.opencode/commands/`, `.opencode/skills/`, and `.opencode/rules/` from the project root. Simply open the project:
 
 ```bash
 opencode .
@@ -128,7 +128,7 @@ opencode .
 chmod +x install.sh && ./install.sh
 ```
 
-Installs skills to `~/.opencode/skills/` and commands for global use.
+Installs skills to `~/.config/opencode/skills/` and commands for global use.
 
 ## Critical Rules (Always Active)
 

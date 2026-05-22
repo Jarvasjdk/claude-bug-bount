@@ -1,16 +1,16 @@
 #!/bin/bash
-# OpenCode Bug Bounty — install skills into ~/.opencode/skills/
+# OpenCode Bug Bounty — install skills into ~/.config/opencode/skills/
 
 set -e
 
-INSTALL_DIR="${HOME}/.opencode/skills"
+INSTALL_DIR="${HOME}/.config/opencode/skills"
 mkdir -p "${INSTALL_DIR}"
 
 echo "Installing Bug Bounty skills..."
 echo ""
 
 # Copy all skills
-for skill_dir in skills/*/; do
+for skill_dir in .opencode/skills/*/; do
     skill_name=$(basename "$skill_dir")
     mkdir -p "${INSTALL_DIR}/${skill_name}"
     cp "${skill_dir}SKILL.md" "${INSTALL_DIR}/${skill_name}/SKILL.md"
@@ -18,10 +18,10 @@ for skill_dir in skills/*/; do
 done
 
 # Install commands
-COMMANDS_DIR="${HOME}/.opencode/commands"
+COMMANDS_DIR="${HOME}/.config/opencode/commands"
 mkdir -p "${COMMANDS_DIR}"
 
-for cmd_file in commands/*.md; do
+for cmd_file in .opencode/commands/*.md; do
     cmd_name=$(basename "$cmd_file")
     cp "$cmd_file" "${COMMANDS_DIR}/${cmd_name}"
     echo "✓ Installed command: ${cmd_name}"

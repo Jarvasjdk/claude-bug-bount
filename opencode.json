@@ -8,5 +8,9 @@
     "build": {
       "model": "deepseek/deepseek-v4-pro"
     }
-  }
+  },
+  "instructions": [
+    ".opencode/rules/hunting.md",
+    ".opencode/rules/reporting.md"
+  ]
 }

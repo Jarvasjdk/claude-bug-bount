@@ -50,7 +50,7 @@ Full pipeline: Recon -> Learn -> Hunt -> Validate -> Report. One skill for every
 16. **TWO-EYE APPROACH** -- combine systematic testing (checklist) with anomaly detection (watch for unexpected behavior)
 17. **T-SHAPED KNOWLEDGE** -- go DEEP in one area and BROAD across everything else
 
-> **For the full hunting methodology** — 5-phase non-linear workflow, developer psychology framework, session discipline, tool routing by phase, and Wide/Deep route selection — see **`skills/bb-methodology/SKILL.md`**.
+> **For the full hunting methodology** — 5-phase non-linear workflow, developer psychology framework, session discipline, tool routing by phase, and Wide/Deep route selection — see **`.opencode/skills/bb-methodology/SKILL.md`**.
 
 ---
 
@@ -1572,12 +1572,12 @@ To use this as an OpenCode skill, copy this file to your skills directory:
 
 ```bash
 # Option A: Clone the repo and link the skill
-git clone https://github.com/shuvonsec/claude-bug-bounty.git ~/.opencode/skills/bug-bounty
+git clone https://github.com/shuvonsec/claude-bug-bounty.git ~/.config/opencode/skills/bug-bounty
 
 # Option B: Direct copy
-mkdir -p ~/.opencode/skills/bug-bounty
+mkdir -p ~/.config/opencode/skills/bug-bounty
 curl -s https://raw.githubusercontent.com/shuvonsec/claude-bug-bounty/main/SKILL.md \
-  -o ~/.opencode/skills/bug-bounty/SKILL.md
+  -o ~/.config/opencode/skills/bug-bounty/SKILL.md
 ```
 
 Then in OpenCode, this skill loads automatically when you ask about bug bounty, recon, or vulnerability hunting.
