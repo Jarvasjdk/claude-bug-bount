@@ -1,6 +1,6 @@
 # Caido MCP Integration
 
-Connect Claude Bug Bounty to [Caido](https://caido.io) — the lightweight web security auditing toolkit — via the community [`caido-mcp-server`](https://github.com/c0tton-fluff/caido-mcp-server).
+Connect the Bug Bounty toolkit to [Caido](https://caido.io) — the lightweight web security auditing toolkit — via the community [`caido-mcp-server`](https://github.com/c0tton-fluff/caido-mcp-server).
 
 Caido is a Burp Suite alternative built in Rust. If you already use Caido as your daily proxy, this integration gives the hunting agent live visibility into your traffic the same way the Burp MCP client does.
 
@@ -44,17 +44,13 @@ Add to your `~/.zshrc` or `~/.bashrc` for persistence.
 
 > Prefer OAuth? Run `CAIDO_URL=http://localhost:8080 caido-mcp-server login` once — the token is cached at `~/.caido-mcp/token.json` and you can drop the `CAIDO_PAT` env var.
 
-### Step 4: Add to Claude Code settings
+### Step 4: Add to OpenCode Config
 
-Copy the `caido` entry from `config.json` in this directory into your `~/.claude/settings.json` under `mcpServers`. If you have no other MCP servers configured:
-
-```bash
-cp config.json ~/.claude/settings.json
-```
+Copy the `caido` entry from `config.json` in this directory into your `opencode.json` under `mcpServers`.
 
 ### Step 5: Verify connection
 
-Start Caido, then in Claude Code:
+Start Caido, then in OpenCode:
 
 ```
 /hunt target.com

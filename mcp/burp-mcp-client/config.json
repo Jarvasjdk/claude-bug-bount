@@ -9,5 +9,5 @@
       }
     }
   },
-  "_comment": "Copy this into your .claude/settings.json mcpServers section. Set BURP_API_KEY in your environment."
+  "_comment": "Copy this into your opencode.json mcpServers section. Set BURP_API_KEY in your environment."
 }

@@ -1,6 +1,6 @@
 # Burp Suite MCP Integration
 
-Connect Claude Bug Bounty to PortSwigger's official Burp Suite MCP server for live HTTP traffic visibility.
+Connect the Bug Bounty toolkit to PortSwigger's official Burp Suite MCP server for live HTTP traffic visibility.
 
 ## What You Get
 
@@ -41,14 +41,16 @@ export BURP_API_KEY="your-api-key-here"
 
 Add to your `~/.zshrc` or `~/.bashrc` for persistence.
 
-### Step 4: Add to Claude Code Settings
+### Step 4: Add to OpenCode Config
 
-Copy the MCP server config into your Claude Code settings:
+Copy the MCP server config into your `opencode.json`:
 
 ```bash
-# Edit your Claude Code settings
-claude config edit
+# Edit your opencode.json
+# Add the `burp` entry to the `mcpServers` section
 ```
+
+Or copy the config entry directly into your `opencode.json` under `mcpServers`.
 
 Add the `burp` entry from `config.json` in this directory to your `mcpServers` section.
 
@@ -56,12 +58,12 @@ Alternatively, copy the full config:
 
 ```bash
 # If you don't have other MCP servers configured:
-cp config.json ~/.claude/settings.json
+# Copy the burp entry into your opencode.json mcpServers section
 ```
 
 ### Step 5: Verify Connection
 
-Start Burp Suite, then in Claude Code:
+Start Burp Suite, then in OpenCode:
 
 ```
 /hunt target.com

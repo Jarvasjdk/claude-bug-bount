@@ -1,12 +1,12 @@
 # Terms & Conditions
 
-**Claude Bug Bounty** — Last updated: April 2026
+**OpenCode Bug Bounty** — Last updated: May 2026
 
 ---
 
 ## 1. What This Tool Is
 
-Claude Bug Bounty is a free, open-source plugin for Claude Code that helps security researchers find vulnerabilities in authorized bug bounty programs. It is a tool to assist human hunters — not a replacement for professional judgment.
+OpenCode Bug Bounty is a free, open-source plugin for OpenCode that helps security researchers find vulnerabilities in authorized bug bounty programs. It is a tool to assist human hunters — not a replacement for professional judgment.
 
 ---
 
@@ -38,7 +38,7 @@ By using this tool, you agree that:
 
 ## 4. What We Are Not Responsible For
 
-The authors of Claude Bug Bounty provide this software **as-is**, with no warranties of any kind.
+The authors of this software provide it **as-is**, with no warranties of any kind.
 
 We are not responsible for:
 - Bans, legal action, or penalties resulting from misuse

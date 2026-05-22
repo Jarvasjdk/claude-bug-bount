@@ -16,7 +16,7 @@ Usage (standalone test):
     python3 mcp/hackerone-mcp/server.py policy "example-corp"
 
 MCP integration:
-    Add to .claude/settings.json mcpServers — see config.json.
+    Add to opencode.json mcpServers — see config.json.
 """
 
 import json
@@ -56,7 +56,7 @@ def _graphql_request(query: str, timeout: int = DEFAULT_TIMEOUT) -> dict:
         data=payload,
         headers={
             "Content-Type": "application/json",
-            "User-Agent": "claude-bug-bounty/2.1",
+            "User-Agent": "bug-bounty/4.3",
         },
     )
     try:

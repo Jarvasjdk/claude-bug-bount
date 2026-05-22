@@ -1,12 +1,12 @@
 #!/bin/bash
-# Claude Bug Bounty — install skills into ~/.claude/skills/
+# OpenCode Bug Bounty — install skills into ~/.opencode/skills/
 
 set -e
 
-INSTALL_DIR="${HOME}/.claude/skills"
+INSTALL_DIR="${HOME}/.opencode/skills"
 mkdir -p "${INSTALL_DIR}"
 
-echo "Installing Claude Bug Bounty skills..."
+echo "Installing Bug Bounty skills..."
 echo ""
 
 # Copy all skills
@@ -18,7 +18,7 @@ for skill_dir in skills/*/; do
 done
 
 # Install commands
-COMMANDS_DIR="${HOME}/.claude/commands"
+COMMANDS_DIR="${HOME}/.opencode/commands"
 mkdir -p "${COMMANDS_DIR}"
 
 for cmd_file in commands/*.md; do
@@ -43,9 +43,9 @@ echo ""
 read -p "Set up Burp MCP now? (y/N): " setup_burp
 if [[ "$setup_burp" =~ ^[Yy]$ ]]; then
     echo ""
-    echo "To connect Burp MCP, add this to your Claude Code settings:"
+    echo "To connect Burp MCP, add this to your OpenCode MCP config:"
     echo ""
-    echo "  claude config edit"
+    echo "  opencode.json  →  mcpServers section"
     echo ""
     echo "Then add to the mcpServers section:"
     cat mcp/burp-mcp-client/config.json | grep -A 10 '"burp"'
@@ -56,6 +56,6 @@ if [[ "$setup_burp" =~ ^[Yy]$ ]]; then
 fi
 
 echo "Start hunting:"
-echo "  claude"
+echo "  opencode ."
 echo "  /recon target.com"
 echo "  /hunt target.com"

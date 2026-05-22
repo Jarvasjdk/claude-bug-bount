@@ -18,17 +18,16 @@ Autonomous hunt loop with deterministic scope safety and configurable checkpoint
 
 ## Session Isolation (Important)
 
-**Start a fresh Claude Code session per target.** Claude accumulates context across a session —
+**Start a fresh OpenCode session per target.** OpenCode accumulates context across a session —
 testing multiple targets in one session causes cross-contamination where findings, payloads,
 and tech stack assumptions from target A bleed into target B.
 
 Best practice:
 ```bash
 # Terminal 1: target A
-claude  →  /autopilot targetA.com
+opencode .  →  /autopilot targetA.com
 
-# Terminal 2: target B (separate process)
-claude  →  /autopilot targetB.com
+opencode .  →  /autopilot targetB.com
 ```
 
 If you must test multiple targets in one session, run `/pickup target.com` at the start of
@@ -42,7 +41,7 @@ Use `--quick` for faster, lower-cost scans (skips deep fuzzing and extended nucl
 /hunt target.com --vuln-class idor   # single bug class — lowest token use
 ```
 
-For long hunts, run `/compact` (Claude Code built-in) periodically to compress context
+For long hunts, consider periodic context compression to manage token usage
 without losing findings.
 
 ## What This Does

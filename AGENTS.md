@@ -1,6 +1,10 @@
-# Claude Bug Bounty — Plugin Guide
+# OpenCode Bug Bounty — Plugin Guide
 
-> This repo is a professional bug bounty hunting toolkit. Originally built for Claude Code, now adapted for OpenCode with DeepSeek V4 Pro.
+This repo is an OpenCode plugin for professional bug bounty hunting across HackerOne, Bugcrowd, Intigriti, and Immunefi.
+
+**Model:** DeepSeek V4 Pro (`deepseek/deepseek-v4-pro`) — set in `opencode.json`
+**Plan mode:** chain building, validation, web3 audits, report writing
+**Build mode:** recon, autopilot loops, surface ranking, token scans
 
 ## What's Here
 
@@ -18,7 +22,11 @@
 | `skills/report-writing/` | H1/Bugcrowd/Intigriti/Immunefi report templates, CVSS 3.1, human tone |
 | `skills/triage-validation/` | 7-Question Gate, 4 gates, never-submit list, conditionally valid table |
 
-### Commands (21 slash commands — in `commands/`)
+### Commands (21 slash commands)
+
+> **Note:** All commands are prefixed to avoid conflicts with OpenCode's built-in commands.
+> `/resume` is a reserved OpenCode command — use `/pickup` to continue a previous hunt.
+> OpenCode reads `commands/` at project root — all commands load automatically via Ctrl+P.
 
 | Command | Usage |
 |---|---|
@@ -33,7 +41,7 @@
 | `/web3-audit` | `/web3-audit <contract.sol>` — smart contract audit |
 | `/autopilot` | `/autopilot target.com --normal` — autonomous hunt loop |
 | `/surface` | `/surface target.com` — ranked attack surface |
-| `/pickup` | `/pickup target.com` — pick up previous hunt |
+| `/pickup` | `/pickup target.com` — pick up previous hunt (was `/resume`) |
 | `/remember` | `/remember` — log finding to hunt memory |
 | `/intel` | `/intel target.com` — fetch CVE + disclosure intel |
 | `/token-scan` | `/token-scan <contract>` — meme coin/token rug pull scanner |
@@ -46,7 +54,7 @@
 | `/arsenal` | `/arsenal [tool]` — list installed external tools or get an install hint |
 | `/scan-cves` | `/scan-cves <host>` — focused nuclei CVE sweep (high/critical) + optional log4j-scan |
 
-### Agents (8 specialized agents — all running DeepSeek V4 Pro)
+### Agents (8 specialized agents)
 
 - `recon-agent` — subdomain enum + live host discovery
 - `report-writer` — generates H1/Bugcrowd/Immunefi reports
@@ -78,25 +86,35 @@
 - `tools/param_discovery.sh` — Arjun/x8 hidden-parameter discovery
 - `tools/bypass_403.sh` — byp4xx + built-in 403/401 bypass matrix
 - `tools/cve_scan.sh` — focused nuclei CVE-tag sweep + optional log4j-scan
-- `tools/external_arsenal.sh` — installed-tool registry (~50 tools)
-- `tools/cicd_scanner.sh` — GitHub Actions workflow scanner
+- `tools/external_arsenal.sh` — installed-tool registry (~50 tools); other scripts source this for `_have <tool>`
+- `tools/cicd_scanner.sh` — GitHub Actions workflow scanner (sisakulint wrapper, remote scan)
 - `tools/token_scanner.py` — automated token red flag scanner (EVM + Solana)
+
+### External tool references
+
+- `wordlists/REFERENCES.md` — pointers to SecLists / OneListForAll / fuzz4bounty / PayloadsAllTheThings
+- `skills/security-arsenal/REFERENCES.md` — methodology, writeup archives, dorks, key-verification, AI-security skill repos
+- `skills/security-arsenal/METHODOLOGY_CHEATSHEET.md` — per-vuln quick-check tables distilled from HowToHunt + HolyTips + AllAboutBugBounty + KingOfBugBountyTips
 
 ### MCP Integrations (in `mcp/`)
 
 - `mcp/burp-mcp-client/` — Burp Suite proxy integration
+- `mcp/caido-mcp-client/` — Caido proxy integration
 - `mcp/hackerone-mcp/` — HackerOne public API (Hacktivity, program stats, policy)
 
 ### Hunt Memory (in `memory/`)
 
 - `memory/pattern_db.py` — cross-target pattern learning
 - `memory/audit_log.py` — request audit log, rate limiter, circuit breaker
-- `memory/rotation.py` — size-based JSONL rotation (10MB cap, keep 3 backups)
+- `memory/rotation.py` — size-based JSONL rotation (10MB cap, keep 3 backups), auto-fired on append
 - `memory/schemas.py` — schema validation for all data
 
 ## Start Here
 
+OpenCode auto-discovers `commands/`, `skills/`, and `rules/` from the project root. Simply open the project:
+
 ```bash
+opencode .
 # Tab to pick an agent, or use commands directly:
 # /recon target.com
 # /hunt target.com
@@ -104,11 +122,13 @@
 # /report     (after validation passes)
 ```
 
-## Install Tools
+## Install Skills
 
 ```bash
 chmod +x install.sh && ./install.sh
 ```
+
+Installs skills to `~/.opencode/skills/` and commands for global use.
 
 ## Critical Rules (Always Active)
 
@@ -117,11 +137,3 @@ chmod +x install.sh && ./install.sh
 3. Run 7-Question Gate BEFORE writing any report
 4. KILL weak findings fast — N/A hurts your validity ratio
 5. 5-minute rule — nothing after 5 min = move on
-
-## OpenCode Notes
-
-- **Model:** DeepSeek V4 Pro (`deepseek/deepseek-v4-pro`) — set in `opencode.json` and all agent frontmatter
-- **Plan mode** — use for: chain building, validation, web3 audits, report writing
-- **Build mode** — use for: recon, autopilot loops, surface ranking, token scans
-- **Memory GC:** Run `/memory-gc --rotate` manually (the `.claude/` hook won't fire in OpenCode)
-- **Commands:** OpenCode reads `commands/` at project root — all 21 commands load automatically via `ctrl+p`

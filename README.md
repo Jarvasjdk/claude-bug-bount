@@ -1,25 +1,25 @@
 <p align="center">
-  <img src="logo.png" alt="Claude Bug Bounty Logo" width="320"/>
+  <img src="logo.png" alt="OpenCode Bug Bounty Logo" width="320"/>
 </p>
 
 <div align="center">
 
 <img src="https://img.shields.io/badge/v4.3.0-Auth_Sessions_%2B_Arsenal-blueviolet?style=for-the-badge" alt="v4.3.0">
 
-# Claude Bug Bounty
+# OpenCode Bug Bounty
 
 ### Find security vulnerabilities, get paid — with AI doing the heavy lifting
 
 *Your AI hunting partner that remembers past targets, spots vulnerabilities, and writes reports for you.*
 
-<sub>by <a href="https://shuvonsec.me">shuvonsec</a></sub>
+<sub>by <a href="https://shuvonsec.me">shuvonsec</a> · OpenCode port</sub>
 
 <br>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8+-3776AB.svg?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Tests](https://img.shields.io/badge/Tests-180_passing-brightgreen.svg?style=flat-square)](tests/)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-D97706.svg?style=flat-square&logo=anthropic&logoColor=white)](https://claude.ai/claude-code)
+[![OpenCode](https://img.shields.io/badge/OpenCode-Plugin-4F46E5.svg?style=flat-square)](https://opencode.ai)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](#contributing)
 
 <br>
@@ -28,7 +28,7 @@
 
 <br>
 
-![Commands](https://img.shields.io/badge/commands-23-D97706?style=flat-square)
+![Commands](https://img.shields.io/badge/commands-23-4F46E5?style=flat-square)
 ![Agents](https://img.shields.io/badge/AI_agents-8-blueviolet?style=flat-square)
 ![Skills](https://img.shields.io/badge/skill_domains-9-3776AB?style=flat-square)
 ![Web2](https://img.shields.io/badge/web2_classes-20-brightgreen?style=flat-square)
@@ -44,7 +44,7 @@
 
 **Bug bounty hunting** is when companies pay you real money to find security vulnerabilities in their websites and apps before bad actors do. Platforms like HackerOne and Bugcrowd connect hunters with companies. Payouts range from $100 to $1,000,000+ depending on severity.
 
-**This tool** is a plugin for [Claude Code](https://claude.ai/claude-code) (Anthropic's AI coding assistant) that turns it into a professional bug bounty hunting partner. Instead of juggling 15 different tools and writing reports from scratch, you just type a command and the AI handles the rest.
+**This tool** is a plugin for [OpenCode](https://opencode.ai) (an AI coding assistant) that turns it into a professional bug bounty hunting partner. Instead of juggling 15 different tools and writing reports from scratch, you just type a command and the AI handles the rest.
 
 **In plain terms:**
 - You give it a target website
@@ -77,44 +77,35 @@ Most hunters waste hours on things that shouldn't take that long. Here's the shi
 
 ## Quick Start
 
-> **Prerequisite:** You need [Claude Code](https://claude.ai/claude-code) installed and a Claude **Pro** or **Max** plan (or an Anthropic API key with credit). Claude Code itself is free to install, but the underlying model usage requires a paid plan or API billing — the free Claude.ai web account does not include Claude Code access.
+> **Prerequisite:** You need [OpenCode](https://opencode.ai) installed and a DeepSeek V4 Pro API key configured. The model is set in `opencode.json`.
 
-### Way 1 — Just ask Claude to install it (recommended)
+### Way 1 — Open the project (recommended)
 
-Open your terminal, run `claude`, and paste this prompt. Claude does the rest:
-
-```text
-Help me install the Claude Bug Bounty toolkit from
-https://github.com/shuvonsec/claude-bug-bounty into ~/tools/.
-
-Steps:
-1. git clone the repo into ~/tools/claude-bug-bounty
-2. cd into it and run ./install_tools.sh   (scanners: subfinder, httpx, nuclei, gau, katana, ffuf, dnsx, nmap)
-3. then run ./install.sh                   (registers the AI skills + 23 slash commands into ~/.claude/)
-4. verify the install by listing the new commands (/recon, /hunt, /validate, /report, /autopilot)
-   and confirming the bug-bounty + web2-recon + report-writing skills are available
-5. if anything fails (Go missing, Python pkg, brew formula), tell me exactly which tool
-   broke and the one-line fix — don't silently skip it
-
-I'm on macOS / Linux. Use brew or apt as needed. Don't sudo unless I approve.
+```bash
+git clone https://github.com/shuvonsec/claude-bug-bounty.git
+cd claude-bug-bounty
+opencode .
+# Tab to pick an agent, or use commands directly:
+# /recon target.com
+# /hunt target.com
 ```
 
-That's it. Claude reads the repo, runs the installers, surfaces any failures, and tells you when you're ready to hunt.
+OpenCode auto-discovers `commands/`, `skills/`, and `rules/` from the project root. All 21 slash commands and 9 skill domains are available immediately.
 
-### Way 2 — Manual install (if you prefer to drive)
+### Way 2 — Manual install
 
 ```bash
 git clone https://github.com/shuvonsec/claude-bug-bounty.git
 cd claude-bug-bounty
 chmod +x install_tools.sh && ./install_tools.sh   # installs scanning tools (subfinder, httpx, nuclei...)
-chmod +x install.sh && ./install.sh               # installs AI skills + commands into Claude Code
+chmod +x install.sh && ./install.sh               # installs AI skills + commands into ~/.opencode/
 ```
 
 <br>
 
 ### Start hunting — paste-ready prompts
 
-Open `claude` in your terminal and paste any of these. They work as natural-language prompts (no slash commands needed) and let Claude pick the right tools, agents, and gates for the job.
+Open `opencode` in your terminal and paste any of these. They work as natural-language prompts (no slash commands needed) and let the AI pick the right tools, agents, and gates for the job.
 
 **Recon** — map the target
 
@@ -212,7 +203,7 @@ for commit leaks.
 
 <br>
 
-> **Don't use Claude Code?** Run the Python tools directly:
+> **Don't use OpenCode?** Run the Python tools directly:
 > ```bash
 > python3 tools/hunt.py --target target.com
 > ./tools/recon_engine.sh target.com
@@ -222,20 +213,20 @@ for commit leaks.
 
 ## How It Works
 
-A team of specialists, each doing one job. Claude orchestrates; memory persists across sessions.
+A team of specialists, each doing one job. The model orchestrates; memory persists across sessions.
 
 ```mermaid
 flowchart TD
-    You([You]) --> Claude[Claude Code]
-    Burp[Burp MCP<br/>browser traffic] -.-> Claude
-    H1[HackerOne MCP<br/>program intel] -.-> Claude
-    Claude --> Recon[Recon<br/>subdomains · URLs · APIs]
-    Claude --> Hunt[Hunt<br/>test &amp; validate]
-    Claude --> Report[Report<br/>H1 · Bugcrowd · Immunefi]
+    You([You]) --> AI[OpenCode<br/>DeepSeek V4 Pro]
+    Burp[Burp MCP<br/>browser traffic] -.-> AI
+    H1[HackerOne MCP<br/>program intel] -.-> AI
+    AI --> Recon[Recon<br/>subdomains · URLs · APIs]
+    AI --> Hunt[Hunt<br/>test &amp; validate]
+    AI --> Report[Report<br/>H1 · Bugcrowd · Immunefi]
     Recon --> Memory[(Hunt Memory<br/>persistent across sessions)]
     Hunt --> Memory
     Report --> Memory
-    Memory -.feeds back.-> Claude
+    Memory -.feeds back.-> AI
 ```
 
 Run the whole loop, or any step on its own.
@@ -427,27 +418,27 @@ brew install go python3 node jq
 sudo apt install golang python3 nodejs jq
 ```
 
-You also need [Claude Code](https://claude.ai/claude-code) installed and a **Claude Pro or Max plan** (or an Anthropic API key with credit). The free Claude.ai web account does not include Claude Code access — that's the model billing, not the CLI.
+You also need [OpenCode](https://opencode.ai) installed and a DeepSeek V4 Pro API key. The model config is in `opencode.json`.
 
 ### Install — two ways
 
-**A. Let Claude install it for you.** Open `claude` in your terminal and paste:
+**A. Clone and open with OpenCode:**
 
-```text
-Help me install the Claude Bug Bounty toolkit from
-https://github.com/shuvonsec/claude-bug-bounty into ~/tools/. Clone the repo,
-run ./install_tools.sh, then ./install.sh. Verify the /recon /hunt /validate
-/report commands and the bug-bounty skill are registered. If anything breaks
-(Go, Python, brew/apt), tell me which tool and the exact one-line fix.
+```bash
+git clone https://github.com/shuvonsec/claude-bug-bounty.git
+cd claude-bug-bounty
+opencode .
 ```
 
-**B. Drive it yourself:**
+OpenCode auto-discovers all commands, skills, and rules from the project root.
+
+**B. Full install with tools:**
 
 ```bash
 git clone https://github.com/shuvonsec/claude-bug-bounty.git
 cd claude-bug-bounty
 chmod +x install_tools.sh && ./install_tools.sh   # scanning tools (subfinder, httpx, nuclei, etc.)
-chmod +x install.sh && ./install.sh               # AI skills + commands into Claude Code
+chmod +x install.sh && ./install.sh               # AI skills + commands into ~/.opencode/
 ```
 
 ### API Keys
@@ -502,7 +493,7 @@ These apply every session, no exceptions:
 |:---|:---|
 | **[claude-bug-bounty](https://github.com/shuvonsec/claude-bug-bounty)** | This — full hunting pipeline from recon to report |
 | **[web3-bug-bounty-hunting-ai-skills](https://github.com/shuvonsec/web3-bug-bounty-hunting-ai-skills)** | Smart contract security — 10 bug classes, Foundry PoC templates |
-| **[public-skills-builder](https://github.com/shuvonsec/public-skills-builder)** | Turns 500+ public bug writeups into Claude skill files |
+| **[public-skills-builder](https://github.com/shuvonsec/public-skills-builder)** | Turns 500+ public bug writeups into skill files |
 
 <br>
 

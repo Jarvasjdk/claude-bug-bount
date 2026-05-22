@@ -1130,7 +1130,7 @@ sisakulint findings are **potentially exploitable** — not confirmed bugs. Ever
 
 #### 7. AI Agent Security
 
-**Gate question:** Is an AI agent (Gemini CLI, Claude Code, Cline, Codex) invoked in a workflow where external users can influence the prompt?
+**Gate question:** Is an AI agent (Gemini CLI, OpenCode, Cline, Codex) invoked in a workflow where external users can influence the prompt?
 
 **Verification depth:**
 1. **Trigger + prompt source** — `issues: opened` → AI triage bot reads `github.event.issue.body`. The body IS the prompt. HTML comments (`<!-- ignore previous instructions -->`) are invisible in GitHub UI but included in the API response and thus in the AI prompt.
@@ -1566,19 +1566,18 @@ When payout is being downgraded, use these counters:
 
 ---
 
-# INSTALLATION (Claude Code Skill)
+# INSTALLATION (OpenCode Skill)
 
-To use this as a Claude Code skill, copy this file to your skills directory:
+To use this as an OpenCode skill, copy this file to your skills directory:
 
 ```bash
 # Option A: Clone the repo and link the skill
-git clone https://github.com/shuvonsec/claude-bug-bounty.git ~/.claude/skills/bug-bounty
-ln -s ~/.claude/skills/bug-bounty/SKILL.md ~/.claude/skills/bug-bounty/SKILL.md
+git clone https://github.com/shuvonsec/claude-bug-bounty.git ~/.opencode/skills/bug-bounty
 
 # Option B: Direct copy
-mkdir -p ~/.claude/skills/bug-bounty
+mkdir -p ~/.opencode/skills/bug-bounty
 curl -s https://raw.githubusercontent.com/shuvonsec/claude-bug-bounty/main/SKILL.md \
-  -o ~/.claude/skills/bug-bounty/SKILL.md
+  -o ~/.opencode/skills/bug-bounty/SKILL.md
 ```
 
-Then in Claude Code, this skill loads automatically when you ask about bug bounty, recon, or vulnerability hunting.
+Then in OpenCode, this skill loads automatically when you ask about bug bounty, recon, or vulnerability hunting.

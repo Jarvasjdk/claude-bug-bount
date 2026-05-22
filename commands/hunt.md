@@ -90,11 +90,11 @@ If you're on a free OpenRouter model and the agent keeps narrating instead of ex
 
 ## Session Isolation
 
-**One session per target.** Claude accumulates context — testing two targets in one session causes cross-contamination where payloads, assumptions, and findings from target A affect target B.
+**One session per target.** The model accumulates context — testing two targets in one session causes cross-contamination where payloads, assumptions, and findings from target A affect target B.
 
 ```bash
-claude  →  /hunt targetA.com   # Terminal 1
-claude  →  /hunt targetB.com   # Terminal 2 (separate process)
+opencode . --target targetA.com   # Terminal 1
+opencode . --target targetB.com   # Terminal 2 (separate process)
 ```
 
 ## Multi-Target
@@ -123,7 +123,7 @@ done < targets.txt
 
 ## Chrome MCP Mode (--chrome)
 
-Requires Chrome MCP configured in Claude Code settings. Enables flows the headless scanner can't reach:
+Requires Chrome MCP configured in your OpenCode MCP settings. Enables flows the headless scanner can't reach:
 - OAuth / SSO / 2FA flows that require JS
 - DOM-based XSS (invisible to curl probes)
 - WebSocket endpoints
@@ -276,7 +276,7 @@ Every 20 min ask: "Am I making progress?" No → rotate to next endpoint or vuln
 
 ## Getting Specific Results (Anti-Vague Rule)
 
-If Claude gives you a generic message like "try testing for XSS" or "check for IDOR", that is not useful. Demand specificity:
+If the model gives you a generic message like "try testing for XSS" or "check for IDOR", that is not useful. Demand specificity:
 
 ```
 Give me the EXACT curl command to test endpoint X.

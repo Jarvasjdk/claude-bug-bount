@@ -29,7 +29,7 @@ Two usage modes:
    required.
 
 Falls back to plain pass-through output when stdout is not a TTY (piped,
-redirected, captured by Claude Code, CI). The dashboard is decoration;
+redirected, captured by the AI, CI). The dashboard is decoration;
 the actual log lines always reach stdout when not in TTY mode.
 """
 from __future__ import annotations
@@ -161,7 +161,7 @@ def print_banner(
     tagline: str = "+ Recon. Hunt. Validate. Report. +",
     version: str = "v4.3",
 ):
-    """Print the OpenClaude-style startup banner.
+    """Print the startup banner.
 
     Big green block letters, tagline, an info panel (target/mode/output/auth),
     a status pill, and a version line. Renders to whatever stdout is — colour
@@ -178,7 +178,7 @@ def print_banner(
     out.append(f"{DIM}{tagline}{RESET}")
     out.append("")
 
-    # Info panel — like OpenClaude's Provider/Model/Endpoint block.
+    # Info panel — Provider/Model/Endpoint block.
     panel = []
     if target:
         panel.append(("Target",  f"{CYAN}{target}{RESET}"))
@@ -410,7 +410,7 @@ class Dashboard:
 
     def _emit_plain(self, line: str):
         """In non-TTY mode, print a phase transition as a plain line so logs
-        still tell the story when piped to a file or captured by Claude Code."""
+        still tell the story when piped to a file or captured by the AI."""
         if not self._is_tty:
             print(line, flush=True)
 

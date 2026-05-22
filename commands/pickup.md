@@ -6,7 +6,7 @@ description: Pick up a previous hunt on a target — shows hunt history, unteste
 
 Pick up where you left off on a target.
 
-> **Renamed from `/resume`** — `/resume` is a reserved Claude Code command. Use `/pickup` to continue a previous hunt.
+> **Renamed from `/resume`** — `/resume` is a reserved OpenCode command. Use `/pickup` to continue a previous hunt.
 
 ## What This Does
 

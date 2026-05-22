@@ -298,7 +298,7 @@ def run_vuln_scan(domain, quick=False):
 
 def generate_reports(domain):
     """Generate reports for findings."""
-    log("warn", "report_generator.py has been removed. Use /report in Claude Code to generate reports.")
+    log("warn", "report_generator.py has been removed. Use /report to generate reports.")
     return 0
 
 
@@ -393,7 +393,7 @@ def print_dashboard(results):
 
 def run_cve_hunt(domain):
     """Run CVE hunter on a target."""
-    log("warn", "cve_hunter.py has been removed. Use /intel in Claude Code for CVE intelligence.")
+    log("warn", "cve_hunter.py has been removed. Use /intel for CVE intelligence.")
     return False
 
 

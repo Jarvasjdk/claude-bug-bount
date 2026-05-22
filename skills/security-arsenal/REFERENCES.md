@@ -70,8 +70,8 @@ the right curl-one-liner per provider (AWS / Stripe / Slack / Twilio / ...).
 | Repo | Idea worth borrowing |
 |---|---|
 | `mukul975/Anthropic-Cybersecurity-Skills` | 754 cybersecurity skills mapped to MITRE ATT&CK / NIST CSF |
-| `SnailSploit/Claude-Red` | Curated offensive-security skills for the Claude skills system |
-| `0xSteph/pentest-ai-agents` | Specialised Claude Code agents for offsec research |
+| `SnailSploit/Claude-Red` | Curated offensive-security skills for AI coding assistants |
+| `0xSteph/pentest-ai-agents` | Specialised AI agents for offensive security research |
 | `BehiSecc/bugSkills` | Tooling to convert disclosed reports into reusable skills |
 | `pikpikcu/airecon` | Self-hosted LLM + tool-router pattern for autonomous recon |
 | `Armur-Ai/Pentest-Swarm-AI` | Swarm-of-agents pattern for full-pipeline pentest |

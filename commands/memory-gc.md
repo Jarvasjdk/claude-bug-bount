@@ -51,6 +51,6 @@ from the repo root.
 Auto-rotation fires automatically in two places:
 
 1. **On every write** — inside `AuditLog.log()` and `PatternDB.save()` when the next append would exceed the cap.
-2. **On session end** — a `Stop` hook in `.claude/settings.json` runs `python3 -m tools.memory_gc --rotate` so long sessions that wrote a lot but never crossed the cap mid-session still get cleaned up.
+2. **On session end** — run `python3 -m tools.memory_gc --rotate` manually or configure it in your OpenCode hooks so long sessions that wrote a lot but never crossed the cap mid-session still get cleaned up.
 
 So this slash command is mainly for ad-hoc reporting (`/memory-gc` with no args) and manual cleanup of accumulated backups (`/memory-gc --purge-backups`).

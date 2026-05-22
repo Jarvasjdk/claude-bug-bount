@@ -3,7 +3,7 @@
 ## v4.2.3 — Auto-rotation Stop Hook (May 2026)
 
 ### Added
-- **`.claude/settings.json`** with a `Stop` hook that runs `python3 -m tools.memory_gc --rotate` (quietly, non-blocking via `async: true`) whenever a Claude Code session ends. Long-running hunts that never trigger an inline write-time rotation now still get GC'd at session end. Hook is a no-op if `tools/memory_gc.py` is missing or the working dir isn't the repo root, so it is safe to ship in the project file.
+- **Memory GC** — `tools/memory_gc.py` with `--rotate` flag auto-rotates hunt-memory JSONL files at 10MB, keeping 3 backups. Safe under `fcntl.LOCK_EX` for concurrent processes. Run manually via `/memory-gc`.
 
 ---
 
@@ -76,7 +76,7 @@
   - Solana: SPL token account authority checks, metadata validation
 
 ### Changed
-- `CLAUDE.md`: Skills count 8 → 9, added `meme-coin-audit` to skill table; Commands 13 → 14, added `/token-scan`
+- `AGENTS.md`: Skills count 8 → 9, added `meme-coin-audit` to skill table; Commands 13 → 14, added `/token-scan`
 - `README.md`: Updated skill domain count
 
 ---
@@ -114,7 +114,7 @@
   - **Part 3: Navigation & Timing** — "I'm stuck because..." quick reference table, 20-minute rotation clock, tool routing by phase with rationale, session start/end checklists
 
 ### Changed
-- `CLAUDE.md`: Skills count 7 → 8, added `bb-methodology` to skill table
+- `AGENTS.md`: Skills count 7 → 8, added `bb-methodology` to skill table
 - `README.md`: Updated skill domain count to 8
 - `SKILL.md`: Added cross-reference to `bb-methodology` after CRITICAL RULES section
 
@@ -174,7 +174,7 @@
 
 ## v2.0.0 — ECC-Style Plugin Architecture (Mar 2026)
 
-Major restructure into a full Claude Code plugin with multi-component architecture.
+Major restructure into a full bug bounty plugin with multi-component architecture.
 
 ### Added
 - `skills/` directory with 7 focused skill domains (split from monolithic SKILL.md)
@@ -195,15 +195,15 @@ Major restructure into a full Claude Code plugin with multi-component architectu
   - `/triage` — quick 7-Question Gate
   - `/web3-audit` — smart contract audit
 - `agents/` directory with 5 specialized agents
-  - `recon-agent` — runs recon pipeline, uses claude-haiku-4-5 for speed
-  - `report-writer` — generates reports, uses claude-opus-4-6 for quality
-  - `validator` — validates findings, uses claude-sonnet-4-6
-  - `web3-auditor` — audits contracts, uses claude-sonnet-4-6
-  - `chain-builder` — builds exploit chains, uses claude-sonnet-4-6
+  - `recon-agent` — runs recon pipeline
+  - `report-writer` — generates reports
+  - `validator` — validates findings
+  - `web3-auditor` — audits contracts
+  - `chain-builder` — builds exploit chains
 - `hooks/hooks.json` — session start/stop hooks with hunt reminders
 - `rules/hunting.md` — 17 critical hunting rules (always active)
 - `rules/reporting.md` — 12 report quality rules (always active)
-- `CLAUDE.md` — plugin overview and quick-start guide
+- `AGENTS.md` — plugin overview and quick-start guide
 - `install.sh` — one-command skill installation
 
 ### Content Added to Skills

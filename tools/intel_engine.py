@@ -8,7 +8,7 @@ Called by /intel command. Outputs prioritized intel with memory context.
 Usage:
     python3 intel_engine.py --target target.com --tech "nextjs,graphql"
     python3 intel_engine.py --target target.com --tech "nextjs" --program target-program
-    python3 intel_engine.py --target target.com --tech "nextjs" --memory-dir ~/.claude/projects/proj/hunt-memory
+    python3 intel_engine.py --target target.com --tech "nextjs" --memory-dir ./memory
 """
 
 import argparse

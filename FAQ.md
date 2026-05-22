@@ -10,9 +10,9 @@ Companies pay security researchers (called "hunters") to find vulnerabilities in
 
 ---
 
-**What is Claude Code?**
+**What is OpenCode?**
 
-Claude Code is a free command-line tool from Anthropic (the company behind Claude AI). It runs in your terminal and lets you use AI to write code, analyze files, and run tasks. This plugin turns it into a bug bounty hunting assistant. You can download it at [claude.ai/claude-code](https://claude.ai/claude-code).
+OpenCode is a free command-line AI coding assistant. It runs in your terminal and lets you use AI to write code, analyze files, and run tasks. This plugin turns it into a bug bounty hunting assistant. You can learn more at [opencode.ai](https://opencode.ai).
 
 ---
 
@@ -30,7 +30,7 @@ That said, you should understand the basics of how websites work (HTTP requests,
 **Is this free?**
 
 Yes. The plugin is free and open source (MIT license). You do need:
-- A free [Claude Code](https://claude.ai/claude-code) account
+- [OpenCode](https://opencode.ai) installed
 - Some free API keys for better recon (Chaos, VirusTotal — optional but recommended)
 - External tools that `install_tools.sh` installs for free (subfinder, httpx, nuclei, etc.)
 
@@ -83,7 +83,7 @@ If your finding doesn't pass, the tool kills it or asks you to downgrade it. Thi
 
 **How does the memory system work?**
 
-Every time you finish a hunt session, the tool automatically saves a summary of what you tested and found. This gets stored locally in `~/.claude/projects/[project]/hunt-memory/`.
+Every time you finish a hunt session, the tool automatically saves a summary of what you tested and found. This gets stored locally in `memory/` within the project directory.
 
 When you start a new hunt on the same target, it tells you what's already been tested. When you hunt a new target with a similar tech stack, it suggests techniques that worked before.
 
@@ -95,7 +95,7 @@ You can also manually save rich notes (payout, specific technique, tags) by runn
 
 [Burp Suite](https://portswigger.net/burp) is a popular proxy tool that intercepts your browser's traffic so you can inspect and modify HTTP requests. It's the industry standard for web security testing.
 
-This plugin can connect to Burp via MCP (an integration protocol) so Claude can read your proxy history and replay requests through Burp. **But Burp is optional.** Every command works without it — the tool falls back to using `curl` for HTTP requests automatically.
+This plugin can connect to Burp via MCP (an integration protocol) so the AI can read your proxy history and replay requests through Burp. **But Burp is optional.** Every command works without it — the tool falls back to using `curl` for HTTP requests automatically.
 
 If you're serious about bug bounty, install Burp Suite Community Edition (free). If you're just starting out, skip it for now.
 
@@ -140,9 +140,9 @@ The tool has a built-in scope checker (`/scope <asset>`) that tells you whether 
 **Does this tool store my findings or send data anywhere?**
 
 No. Everything stays local on your machine:
-- Hunt memory is stored in `~/.claude/projects/[project]/hunt-memory/`
-- Audit logs stay in the same directory
-- Nothing is sent to any server outside of your normal Claude Code usage
+- Hunt memory is stored locally in `memory/` within the project directory
+
+- Nothing is sent to any server outside of your normal API usage
 
 The `.gitignore` excludes `hunt-memory/` so it won't be accidentally committed to a public repo.
 
@@ -189,7 +189,7 @@ Check your scope input. Run `/scope <asset>` before running `/hunt` or `/autopil
 **How do I update to the latest version?**
 
 ```bash
-cd claude-bug-bounty
+cd bug-bounty
 git pull origin main
 chmod +x install.sh && ./install.sh   # reinstall skills + commands
 ```
@@ -202,4 +202,4 @@ Open an issue on [GitHub](https://github.com/shuvonsec/claude-bug-bounty/issues)
 - What command you ran
 - What you expected to happen
 - What actually happened
-- Your OS and Claude Code version
+- Your OS and OpenCode version

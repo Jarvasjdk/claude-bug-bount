@@ -1,7 +1,7 @@
 """
 Hunt memory system — persistent journal, pattern database, and schema validation.
 
-Runtime data stored at ~/.claude/projects/{project}/hunt-memory/
+Runtime data stored at ./hunt-memory/ within the project directory
 This package contains the code (read/write/validate), not the data.
 """
 
