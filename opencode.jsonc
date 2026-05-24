@@ -1,0 +1,21 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "caido": {
+            "type": "local",
+            "command": ["caido-mcp-server", "serve"],
+            "enabled": true,
+            "environment": {
+                "CAIDO_URL": "http://127.0.0.1:8080"
+            }
+        },
+        "hackerone": {
+            "type": "local",
+            "command": [
+                "python3",
+                "mcp/hackerone-mcp/server.py"
+            ],
+            "enabled": true
+        }
+    }
+}

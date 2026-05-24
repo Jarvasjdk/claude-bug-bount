@@ -2,7 +2,12 @@
 name: report-writer
 description: Bug bounty report writer. Generates professional H1/Bugcrowd/Intigriti/Immunefi reports. Impact-first writing, human tone, no theoretical language, CVSS 4.0 calculation included. Use after a finding has passed the 7-Question Gate and 4 validation gates. Never generates reports with "could potentially" language.
 # tools: Read, Write, Bash
+mode: subagent
 model: deepseek/deepseek-v4-flash
+permission:
+  read: allow
+  write: allow
+  bash: allow
 ---
 
 # Report Writer Agent

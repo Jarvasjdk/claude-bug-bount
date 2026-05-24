@@ -99,59 +99,41 @@ def search_disclosed_reports(
     """
     limit = max(1, min(25, limit))
 
-    where_clauses = ['disclosed_at: { _is_null: false }']
+    where_parts = ['disclosed_at: { _is_null: false }']
     if keyword:
-        safe_keyword = keyword.replace('"', '\\"')
-        where_clauses.append(
-            f'report: {{ title: {{ _icontains: "{safe_keyword}" }} }}'
-        )
+        safe = keyword.replace('"', '\\"').replace("%", "\\%")
+        where_parts.append(f'title: {{ _ilike: "%{safe}%" }}')
     if program:
-        safe_program = program.replace('"', '\\"')
-        where_clauses.append(
-            f'team: {{ handle: {{ _eq: "{safe_program}" }} }}'
-        )
+        safe = program.replace('"', '\\"')
+        where_parts.append(f'team: {{ handle: {{ _eq: "{safe}" }} }}')
 
-    where = ", ".join(where_clauses)
+    where = ", ".join(where_parts)
 
     query = f"""{{
-      hacktivity_items(
-        first: {limit},
-        order_by: {{ field: popular, direction: DESC }},
-        where: {{ {where} }}
-      ) {{
+      reports(first: {limit}, where: {{ {where} }}, order_by: {{ field: disclosed_at, direction: DESC }}) {{
         nodes {{
-          ... on HacktivityDocument {{
-            report {{
-              title
-              severity_rating
-              disclosed_at
-              url
-              substate
-            }}
-            team {{
-              handle
-              name
-            }}
-          }}
+          title
+          severity {{ rating }}
+          disclosed_at
+          url
+          substate
+          team {{ handle name }}
         }}
       }}
     }}"""
 
     data = _graphql_request(query)
-    nodes = (data.get("data") or {}).get("hacktivity_items", {}).get("nodes", [])
+    nodes = (data.get("data") or {}).get("reports", {}).get("nodes", [])
 
     results = []
     for node in nodes:
-        report = node.get("report")
-        if not report:
-            continue
         team = node.get("team") or {}
         results.append({
-            "title": report.get("title", ""),
-            "severity": (report.get("severity_rating") or "unknown").upper(),
-            "disclosed_at": (report.get("disclosed_at") or "")[:10],
-            "url": report.get("url", ""),
-            "state": report.get("substate", ""),
+            "title": node.get("title", ""),
+            "severity": (node.get("severity") or {}).get("rating", "unknown").upper(),
+            "disclosed_at": (node.get("disclosed_at") or "")[:10],
+            "url": node.get("url", ""),
+            "state": node.get("substate", ""),
             "program": team.get("handle", ""),
             "program_name": team.get("name", ""),
         })
@@ -175,13 +157,9 @@ def get_program_stats(program: str) -> dict:
       team(handle: "{safe_program}") {{
         name
         handle
-        url
         offers_bounties
-        default_currency
         base_bounty
         resolved_report_count
-        average_time_to_bounty_awarded
-        average_time_to_first_program_response
         launched_at
         state
       }}
@@ -195,13 +173,9 @@ def get_program_stats(program: str) -> dict:
     return {
         "program": team.get("handle", ""),
         "name": team.get("name", ""),
-        "url": team.get("url", ""),
         "offers_bounties": team.get("offers_bounties", False),
-        "currency": team.get("default_currency", "USD"),
         "base_bounty": team.get("base_bounty"),
         "resolved_reports": team.get("resolved_report_count"),
-        "avg_days_to_bounty": team.get("average_time_to_bounty_awarded"),
-        "avg_days_to_first_response": team.get("average_time_to_first_program_response"),
         "launched_at": (team.get("launched_at") or "")[:10],
         "state": team.get("state", ""),
     }

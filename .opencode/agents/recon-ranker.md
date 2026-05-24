@@ -2,7 +2,13 @@
 name: recon-ranker
 description: Attack surface ranking agent. Takes recon output and hunt memory, produces a prioritized attack plan. Ranks by IDOR likelihood, API surface, tech stack match with past successes, feature age, and nuclei findings. Use after recon to decide what to test first.
 # tools: Read, Bash, Glob, Grep
+mode: subagent
 model: deepseek/deepseek-v4-flash
+permission:
+  bash: allow
+  read: allow
+  glob: allow
+  grep: allow
 ---
 
 # Recon Ranker Agent

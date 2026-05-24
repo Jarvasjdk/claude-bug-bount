@@ -1,8 +1,17 @@
 ---
 name: autopilot
 description: Autonomous hunt loop agent. Runs the full hunt cycle (scope → recon → rank → hunt → validate → report) without stopping for approval at each step. Configurable checkpoints (--paranoid, --normal, --yolo). Uses scope_checker.py for deterministic scope safety on every outbound request. Logs all requests to audit.jsonl. Use when you want systematic coverage of a target's attack surface.
+mode: subagent
 # tools: Bash, Read, Write, Glob, Grep
 model: deepseek/deepseek-v4-flash
+permission:
+  edit: allow
+  bash: allow
+  write: allow
+  read: allow
+  glob: allow
+  burp: allow
+  grep: allow
 ---
 
 # Autopilot Agent
