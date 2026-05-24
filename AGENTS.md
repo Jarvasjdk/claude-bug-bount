@@ -1,6 +1,6 @@
-# Claude Bug Bounty — Plugin Guide
+# OpenCode Bug Bounty — Plugin Guide
 
-This repo is a Claude Code plugin for professional bug bounty hunting across HackerOne, Bugcrowd, Intigriti, and Immunefi.
+This repo is a OpenCode plugin for professional bug bounty hunting across HackerOne, Bugcrowd, Intigriti, and Immunefi. This project was initially written for Claude Code, so if you see anything with claude dont get confused as this was converted to use opencode.
 
 ## What's Here
 
@@ -20,8 +20,8 @@ This repo is a Claude Code plugin for professional bug bounty hunting across Hac
 
 ### Commands (21 slash commands)
 
-> **Note:** All commands are prefixed to avoid conflicts with Claude Code's built-in commands.
-> `/resume` is a reserved Claude Code command — use `/pickup` to continue a previous hunt.
+> **Note:** All commands are prefixed to avoid conflicts with OpenCode built-in commands.
+> `/resume` is a reserved OpenCode command — use `/pickup` to continue a previous hunt.
 
 | Command | Usage |
 |---|---|
@@ -106,7 +106,7 @@ This repo is a Claude Code plugin for professional bug bounty hunting across Hac
 ## Start Here
 
 ```bash
-claude
+opencode
 # /recon target.com
 # /hunt target.com
 # /validate   (after finding something)

@@ -1,8 +1,8 @@
 ---
 name: token-auditor
 description: Fast meme coin and token security auditor. Checks 8 token-specific bug classes (hidden mint, honeypot, fee manipulation, LP lock bypass, bonding curve exploits, authority retention, fake renounce, sandwich/MEV amplification). Runs token_scanner.py for automated red flag detection. Covers EVM (Solidity) and Solana (Rust/Anchor) tokens. Use for any token audit, rug pull assessment, or pre-investment security check.
-tools: Read, Bash, Glob, Grep
-model: claude-sonnet-4-6
+# tools: Read, Bash, Glob, Grep
+model: deepseek/deepseek-v4-flash
 ---
 
 # Token Auditor Agent

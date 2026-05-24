@@ -42,7 +42,7 @@ Use `--quick` for faster, lower-cost scans (skips deep fuzzing and extended nucl
 /hunt target.com --vuln-class idor   # single bug class — lowest token use
 ```
 
-For long hunts, run `/compact` (Claude Code built-in) periodically to compress context
+For long hunts, run `/compact` periodically to compress context
 without losing findings.
 
 ## What This Does
